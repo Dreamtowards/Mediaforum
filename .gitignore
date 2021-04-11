@@ -1,0 +1,8 @@
+
+*.class
+*.DS_Store
+
+Mediaforum-Flutter/mediaforum/build/*
+Mediaforum-Website/node_modules/*
+
+Thumbs.db

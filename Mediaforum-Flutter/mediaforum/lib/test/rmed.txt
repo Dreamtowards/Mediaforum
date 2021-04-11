@@ -1,0 +1,34 @@
+
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            ClipRRect(child: Image.network(Globs.USER['avatar_url'], width: 56, height: 56, fit: BoxFit.cover), borderRadius: BorderRadius.circular(100)),
+            SizedBox(height: 14),
+            Text(Globs.USER['username'], style: Theme.of(context).textTheme.title),
+            Text(Globs.USER['email']),
+            SizedBox(height: 32),
+            Row(children: <Widget>[
+              Text("1,002", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black, letterSpacing: -0.2)),
+              Text(" Posts", style: Theme.of(context).textTheme.caption),
+              SizedBox(width: 10),
+              Text("1,002", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black, letterSpacing: -0.2)),
+              Text(" Followers", style: Theme.of(context).textTheme.caption),
+              SizedBox(width: 10),
+              Text("1,002", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black, letterSpacing: -0.2)),
+              Text(" Folling", style: Theme.of(context).textTheme.caption),
+              SizedBox(width: 10)
+            ]),
+            SizedBox(height: 12),
+            Text("started it today, pretty much brand new,,, my house is a strip mine", style: Theme.of(context).textTheme.caption)
+
+
+
+
+
+
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          ClipRRect(child: Image.network(postdata['user_avatar_url'], width: 32, height: 32), borderRadius: BorderRadius.circular(10)),
+          SizedBox(width: 8),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            Text("Username", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+            Text("Posted on 1 days ago", style: TextStyle(fontSize: 11, fontWeight: FontWeight.w400))
+          ])
+        ]),

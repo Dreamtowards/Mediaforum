@@ -1,0 +1,84 @@
+
+body, html {
+    margin: 0;
+}
+
+#header {
+    padding: 16px;
+    background: darkgray;
+    box-shadow: 0 0 2px 0 black;
+}
+
+.forum-post-item-operation-box a {
+    margin-right: 6px;
+}
+.forum-post-item-operation-box i {
+    font-size: 96%;
+}
+
+.btn-borderless {
+    font-weight: 400;
+    color: #383838;
+    text-decoration: none;
+    padding-left: 6px;
+    padding-right: 6px;
+    transition: .15s;
+}
+.btn-borderless:hover {
+    color: #111;
+    text-decoration: none;
+}
+.btn-borderless:focus {
+    box-shadow: none;
+}
+
+.none-decoration {
+    text-decoration: none!important;
+}
+
+footer a {
+    color: #454545;
+    margin-right: 6px;
+    font-weight: bold;
+}
+footer a:hover {
+    color: #000;
+}
+
+#main_nav svg {
+    /* display: none; */
+    margin-right: 10px;
+}
+
+
+label {
+    font-size: 93%;
+}
+
+
+.nav-link {
+    cursor: pointer;
+}
+
+
+
+.userinfo_navs {
+    padding: .65rem 1.35rem;
+}
+.userinfo_navs:hover {
+    background: #f6f6f6;
+}
+.userinfo_navs span {
+    font-size: 93%;
+}
+
+
+
+.post_preview_card_content img {
+    width: 100%;
+}
+
+
+.dropdown-item {
+    padding: .4rem 1.5rem;
+}

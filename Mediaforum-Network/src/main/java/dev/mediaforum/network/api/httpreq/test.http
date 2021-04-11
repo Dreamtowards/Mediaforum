@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/post_getfeedlist
+Accept: */*
+Content-Type: application/json; charset=utf-8
+Cache-Control: no-cache
+
+{"uid":35, "accessToken":"a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3", "savelist_ids":  [1,2,3,4]}
+
+###

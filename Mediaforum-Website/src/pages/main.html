@@ -1,0 +1,205 @@
+<br>
+
+<div class="row">
+    <!-- Left Navbar -->
+    <div class="col-2">
+        <div class="nav flex-column nav-pills d-block" role="tablist" aria-orientation="vertical" id="main_nav">
+            <a class="nav-link active" data-toggle="pill" href="#" aria-selected="true"><i class="fa fa-home"></i>Home</a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false"><i class="fa fa-fire" style="margin: 0 13px 0 2px;"></i>Hoting</a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false"><i class="fa fa-map"></i>Subscriptions</a>
+            <hr>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false"><i class="fa fa-archive"></i>Libs</a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false"><i class="fa fa-history"></i>History</a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false"><i class="fa fa-clock"></i>Read later</a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false"><i class="fa fa-thumbs-up"></i>Liked posts</a>
+            <a class="nav-link" href="#" style="margin-top: 4px;color: #454545"> <i class="fa fa-angle-down" style="margin-top: 6px;"></i> Show more</a>
+            <hr>
+            <label style="margin: 0 0 8px 16px;font-size: 80%;">SUBSCRIPTIONS</label>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false">Microsoft <sup>(Companey)</sup></a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false">Alphabet <sup>(Companey)</sup></a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false">FORTNE <sup>(Language)</sup></a>
+            <a class="nav-link" data-toggle="pill" href="#" aria-selected="false">Windows 10</a>
+        </div>
+    </div>
+
+    <!-- Mid Content -->
+    <div class="col-7">
+
+        <!-- Post Thread Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="form-row collapse" id="post_titleBox">
+                    <div class="col-10">
+                        <input type="text" class="form-control" placeholder="Title" id="post_title">
+                    </div>
+                    <div class="col-2">
+                        <select class="form-control">
+                            <option value="public">Public</option>
+                            <option value="friendly">Friendly</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div style="height: 12px;width: 100%;"></div>
+                </div>
+
+                <textarea class="form-control" placeholder="Whts new?" id="post_content_textarea"></textarea><br>
+
+                <img src="../_dep/avatar.png" style="width: 28px;height: 28px;" class="rounded-circle">
+                <button class="btn btn-primary float-right" id="post_submit"><i id="post_submit_icon" class="fa fa-plus" style="font-size: 90%;"></i> Post</button>
+
+                <script>
+                    $(function () {
+                        // when content-input is't empty, show title edit box.
+                        $("#post_content_textarea").keyup(e => {
+                            $("#post_titleBox").collapse($(e.target).val().trim()===""?"hide":"show");
+                        });
+
+                        var btnPostSubmit = $("#post_submit");
+                        btnPostSubmit.click(() => {
+                            var iconSubmit = $("#post_submit_icon");
+                            iconSubmit.removeClass("fa-plus").addClass("fa-circle-notch fa-spin");
+                            btnPostSubmit.prop("disabled", true).addClass("disabled");
+
+                            request("/api/post_new", {
+                                title: $("#post_title").val(),
+                                content: $("#post_content_textarea").val()
+                            }, resp => {
+                                alert("success!, postId="+resp.post_id);
+                            }, err => {
+                                alert("failed. "+err.message);
+                            }, () => {
+                                iconSubmit.addClass("fa-plus").removeClass("fa-circle-notch fa-spin");
+                                btnPostSubmit.prop("disabled", false).removeClass("disabled");
+                            })
+                        });
+                    })
+                </script>
+            </div>
+        </div>
+
+        <!-- Thread Preview Card -->
+        <div id="post_preview_cards">
+            <div v-for="post in postList">
+                <div class="card" style="margin-top: 12px;">
+                    <div class="card-body">
+                        <h5 class="d-inline-block"> {{ post.title }} </h5>
+                        <button class="btn btn-borderless float-right" style="padding: 2px;" title="Hide"><i class="fa fa-times"></i></button>
+                        <!--                <p class="text-muted" style="font-size: 85%;">Posted from user01 1 days ago.</p>-->
+
+                        <div v-html="post.content" class="post_preview_card_content"></div>
+
+                        <div>
+                            <button class="btn btn-light"><i class="fa fa-caret-up"></i> <span style="font-size: 15px;font-weight: 600;">19.1k</span></button>
+                            <button class="btn btn-light"><i class="fa fa-caret-down"></i></button>
+
+                            <button class="btn btn-borderless" style="font-size: 85%;font-weight: bold;margin-left: 6px;"><i class="fa fa-comment-alt" style="font-size: 87%;"></i> 19 Comments</button>
+                            <button class="btn btn-borderless" style="font-size: 85%;font-weight: bold;"><i class="fa fa-share" style="font-size: 94%;"></i> Share</button>
+                            <button class="btn btn-borderless" style="font-size: 85%;font-weight: bold;"><i class="fa fa-bookmark" style="font-size: 94%;"></i> Save</button>
+                            <button class="btn btn-borderless" style="font-size: 85%;font-weight: bold;"><i class="fa fa-flag" style="font-size: 94%;"></i> Report</button>
+                            <button class="btn btn-borderless" style="font-size: 90%;"><i class="fa fa-ellipsis-h"></i></button>
+                        </div>
+
+                        <hr>
+                        <div>
+                            <comment-edit-box :post_id="post.id" :parent_comment_id="0" :editbox_hint="'Add a comment...'"></comment-edit-box>
+
+                            <div style="margin-top: 30px;"></div>
+                            <comment-list :post_id="post.id"></comment-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+
+        <script>
+            new Vue({
+                el: "#post_preview_cards",
+                data: {
+                    postList: [],
+                    user: user
+                },
+                created: function () {
+                    request("/api/post_getlist", {}, resp => {
+                        postList = [];
+                        resp.forEach(post => {
+                            postList.push({
+                                id: post.id,
+                                title: post.title,
+                                content:window.markdownit().render(post.content)
+                            });
+                        });
+                        this.postList = postList;
+                    });
+                }
+            });
+            $(".comment_edit").keyup(function () {
+                var btnCommentSubmit = this.parent.parent.childList[1];
+                alert(btnCommentSubmit.innerText);
+                if (this.val() === "") {
+
+                }
+            });
+        </script>
+
+
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="col-3">
+
+        <!-- User Info Card -->
+        <div class="card" id="comp_card_userinfo">
+            <div class="card-body">
+                <img :src="avatar_url" style="width: 30px;height: 30px;margin-top: 6px" class="rounded align-top">
+                <div class="d-inline-block" style="margin-left: 5px;">
+                    <a class="d-block"><b> {{ username }} </b> <span class="badge badge-secondary" style="font-size: 10px;">Lv.3</span></a>
+                    <small class="d-block" style="margin-top: -2px;"> {{ email }} </small>
+                </div>
+
+                <hr>
+<!--                <p style="font-size: 88%"><i style="font-size: 92%" class="fa fa-envelope"></i> ref.drmtowards@gmail.com</p>-->
+
+            </div>
+
+            <hr style="margin: 8px 0;">
+            <!--<i class="fa fa-angle-right float-right" style="margin-top: 5px;"></i>-->
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-house-user"></i> &nbsp; <span>Your content</span> </a>
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-dolly"></i> &nbsp; <span>Paid memberships</span> </a>
+            <hr style="margin: 8px 0;">
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-adjust"></i> &nbsp; <span>Dark mode: Off</span> <i class="fa fa-angle-right float-right" style="margin-top: 5px;"></i></a>
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-globe-americas"></i> &nbsp; <span>Language: English</span> <i class="fa fa-angle-right float-right" style="margin-top: 5px;"></i></a>
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-cog"></i> &nbsp; <span>Settings</span> </a>
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-question-circle"></i> &nbsp; <span>Help</span> </a>
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-exclamation-circle"></i> &nbsp; <span>Send feedback</span> </a>
+            <a href="#" class="btn-borderless userinfo_navs"><i class="fa fa-keyboard"></i> &nbsp; <span>Keyboard shortcuts</span> </a>
+
+            <div style="height: 8px;"></div>
+        </div>
+        <script>
+            new Vue({
+                el: "#comp_card_userinfo",
+                data: user
+            })
+        </script>
+
+        <!-- Footer -->
+        <br>
+        <footer style="padding: 0 4px;font-size: 88%;">
+            <a href="#">About</a>
+            <a href="#">Press</a>
+            <a href="#">Copyright</a> <br>
+            <a href="#">Contact us</a>
+            <a href="#">Creators</a> <br>
+            <a href="#">Advertise</a>
+            <a href="#">Developers</a>
+
+            <br><br>
+            <span class="text-black-50">© 2020 Mediaforum EDS.</span>
+            <br><br>
+        </footer>
+
+    </div>
+</div>
+

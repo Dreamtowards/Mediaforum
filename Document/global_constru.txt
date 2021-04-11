@@ -1,0 +1,15 @@
+
+Profile/
+    users:
+        id, username, email, password_digest/access_token, register_time, 
+
+Article/
+    articles:
+        id, author_id, forum_id, title, content, post_time, 
+
+    comments
+        id, author_id, article_id, parent_id, content, post_time,
+
+Forum/
+    forums:
+        id, name, 

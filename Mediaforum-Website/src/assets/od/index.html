@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.0/css/all.css">
+    <link rel="stylesheet" href="res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="res/css/style.css">
+
+
+    <script src="res/js/js.cookie.js"></script>
+    <script src="res/js/markdown-it.min.js"></script>
+    <script src="res/js/sha256.min.js"></script>
+
+    <script src="res/js/axios.js"></script>
+    <script src="res/js/vue.js"></script>
+
+    <script src="res/js/jquery-3.5.0.min.js"></script>
+    <script src="res/js/popper.min.js"></script>
+    <script src="res/js/bootstrap.js"></script>
+    <script src="res/js/mf.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md shadow-sm">
+    <div class="container d-flex justify-content-between">
+        <div class="row">
+            <div class="col">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>-->
+                    <b>Mediaforum</b>
+                </a>
+            </div>
+            &nbsp;
+<!--            <ul class="nav">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" href="#">Home</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Subs</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Libs</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+        </div>
+        <div>
+            <img src="_dep/avatar.png" style="width: 28px;height: 28px;" class="rounded-circle">
+        </div>
+    </div>
+</nav>
+
+<div id="main_content" class="container">
+
+
+</div>
+
+<script>
+    enterPage(urlparams.get("p"));
+
+    function enterPage(page) {
+        if (page === "" || page == null)
+            page = "main";
+        axios.get("/pages/"+page+".html").then(resp => $("#main_content").html(resp.data));
+    }
+</script>
+</body>
+</html>

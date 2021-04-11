@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/article_post
+Accept: */*
+Content-Type: application/json; charset=utf-8
+Cache-Control: no-cache
+
+{"uid":1, "accessToken":"none", "forum_id": 1, "title": "A Title222", "content": "Tst Content"}
+
+###
