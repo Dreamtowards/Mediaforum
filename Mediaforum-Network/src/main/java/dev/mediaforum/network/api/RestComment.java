@@ -85,7 +85,7 @@ public class RestComment {
         User user = RestUser.INSTANCE.userRepository.findById(comment.authorId).get();
         jsonComm.put("user_id", user.id)
                 .put("user_username", user.username)
-                .put("user_avatar_url", RestUser.userAvatarUrl(user));
+                .put("user_avatar_url", RestUser.getUserAvatarUrl(user));
 
         JSONArray jSubReplies = new JSONArray();
         for (Comment c : commentRepository.findAllByPostIdAndParentCommentId(postId, comment.id)) {

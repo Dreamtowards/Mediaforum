@@ -73,7 +73,7 @@ public class RestPost {
 
             User author = RestUser.INSTANCE.userRepository.findById(post.authorId).get();
             jPost.put("user_username", author.username);
-            jPost.put("user_avatar_url", RestUser.userAvatarUrl(author));
+            jPost.put("user_avatar_url", RestUser.getUserAvatarUrl(author));
 
             jPost.put("was_liked", RestSavelist.INSTANCE.savelistItemRepository.findBySavelistIdAndPostId(userLIKEDPOSTS_Id, post.id) != null);
             jPost.put("liked_count", RestSavelist.INSTANCE.savelistItemRepository.countByPostId(post.id));  // even not really liked-count, there is "saved" count actually.

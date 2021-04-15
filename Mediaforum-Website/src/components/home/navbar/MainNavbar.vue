@@ -38,13 +38,13 @@ export default {
   }},
   methods: {
       toggleSavelists(e) {
-          var btn = $(e.currentTarget);
-          var listbox = $(this.$refs.savelistsbox);
-          var shouldShow = listbox.css("display") === "none";
+          let btnToggle = $(e.currentTarget);
+          let listbox = $(this.$refs.savelistsbox);
+          let shouldshow = listbox.css("display") === "none";
 
-          listbox.collapse(shouldShow?"show":"hide");
-          btn.find("span").text(shouldShow?"Show less":"Show more");
-          btn.find("svg").attr("class", shouldShow?"fa fa-angle-up":"fa fa-angle-down")
+          listbox.collapse(shouldshow?"show":"hide");
+          btnToggle.find("span").text(shouldshow?"Show less":"Show more");
+          btnToggle.find("svg").attr("class", shouldshow?"fa fa-angle-up":"fa fa-angle-down")
       }
   }
 }

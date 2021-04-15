@@ -58,17 +58,23 @@ export default {
       let ele = document.createElement('div');
       ele.innerHTML =
           '<div class="shadow-sm collapse" style="background: #454545;color: #fff;font-weight: 300;font-size: 88%;border-radius: 3px;margin-top: 4px;">'+
-          '<div style="height: 12px;"></div>'+
-          '<span style="margin-left: 16px;">Some Notification Messages</span>'+
-          '<div style="height: 12px;"></div>'+
+          '<p style="padding: 12px 16px;margin: 0;">Some Notification Messages</p>'+
           '</div>';
       notifyBoxList.appendChild(ele);
 
       let box = $(ele.children[0]);
+      let eText = box.find("p");
+      eText.text(msg);
       box.collapse("show");
-      box.find("span").text(msg);
+
       setTimeout(() => {
-        box.collapse("hide");
+        if (box.is(":hover")) {
+          box.mouseout(() => {
+            box.collapse("hide");
+          });
+        } else {
+          box.collapse("hide");
+        }
       }, 5000);
     }
   }

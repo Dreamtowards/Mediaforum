@@ -131,7 +131,7 @@ public class RestUser {
 
         return CollectionUtils.asMap(
                 "username", user.username,
-                "avatar_url", userAvatarUrl(user),
+                "avatar_url", getUserAvatarUrl(user),
                 "email", user.email,
                 "savelists", CollectionUtils.asMap(
                         "HISTORY", savelistInfo(lHis).toMap(),
@@ -148,8 +148,8 @@ public class RestUser {
     }
 
 
-    public static String userAvatarUrl(User user) {
-        return user.avatarUrl==null?NetworkApplication.API_HOST+"/usercontents/1/1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed/default_avatar.png": user.avatarUrl;
+    public static String getUserAvatarUrl(User user) {
+        return user.avatarUrl==null?NetworkApplication.API_BASE +"/usercontents/1/1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed/default_avatar.png": user.avatarUrl;
     }
 
 
